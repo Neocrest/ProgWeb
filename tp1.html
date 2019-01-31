@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title> Chronomètre </title>
+
+  <script>
+
+//cf http://jsfiddle.net/RVqDe/3/
+
+  var chrono = {
+      secondsLeft: 0,
+      timer: undefined,
+
+      Start: function (secondsLeft) {
+          //Init cpt
+          this.secondsLeft = secondsLeft;
+
+          this.timer = setInterval(this.Tick.bind(this), 1000);
+
+//Utiliser setTimeout si on veut éviter répétition appel fonction
+      },
+
+      Tick: function () {
+        //On décrémente toutes les 1000 ms l'élément time mis en emphase
+          document.getElementById("time").innerHTML = --this.secondsLeft;
+          //Arrêt timer
+          if (this.secondsLeft === 0)
+            this.Stop();
+          },
+
+      Stop: function () {
+          clearInterval(this.timer);
+          alert('Temps écoulé');
+      }
+
+  };
+
+
+//Si l'on veut changer le timer, il faut modifier la valeur dans le onload ET l'élément "time" dans l'emphase
+</script>
+</head>
+
+<body onload = chrono.Start(10)>
+<div id = "Chrono">
+</div>
+<button onclick="chrono.Stop();">Stop</button>
+<br/>
+<em id="time">10</em>
+</body>
+</html>
