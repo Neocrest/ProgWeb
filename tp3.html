@@ -1,9 +1,8 @@
 <html>
   <head>
-  <title>Moving square</title>
+  <title>Moving square + delay</title>
   <canvas id ="canvas" width="1500" height="300"></canvas>
   <script type="application/x-javascript">
-
 
 
   var i = 10;
@@ -14,6 +13,7 @@
 
 
 function draw() {
+
     ctx.clearRect(i,10,50,50);    //On empêche la superposition des carrés
     i=i+10;
     ctx.fillRect(i,10,50,50);}
@@ -24,7 +24,8 @@ function carre(){  interval = setInterval(draw, 100);}
 
   </script>
 </head>
-<body onload = 'carre()'>
+<body onload='setTimeout(carre(), 2000)'>
+  <!--Le setTimeout appelle la fonction 2000 ms après chargement de la page-->
 
 </body>
 </html>

@@ -1,0 +1,55 @@
+<html>
+  <head>
+  <title>Moving squares + delay</title>
+  <canvas id ="canvas" width="1500" height="300"></canvas>
+  <script type="application/x-javascript">
+
+
+
+  var i1 =10,   //les i sont les x des canvas
+    i2 = 10,
+    i3 = 10,
+    j=0,    //timer
+//Carré n°1
+    canvas1 = document.getElementById('canvas'),
+    ctx1 = canvas.getContext('2d'),
+//Carré n°2
+  canvas2 = document.getElementById('canvas'),
+  ctx2 = canvas.getContext('2d'),
+//Carré n°3
+  canvas3 = document.getElementById('canvas'),
+  ctx3 = canvas.getContext('2d');
+
+  ctx1.fillStyle = "rgb(200,0,0)";
+  ctx2.fillStyle = "rgb(200,0,0)";
+  ctx3.fillStyle = "rgb(200,0,0)";
+
+
+function draw() {
+
+    ctx1.clearRect(i1,10,50,50);
+    i1=i1+10;
+    ctx1.fillRect(i1,10,50,50);
+    j=j+100;
+
+    if (j>=1000){
+      ctx2.clearRect(i2,10,50,50);
+      i2=i2+10;
+      ctx2.fillRect(i2,10,50,50);
+    }
+
+    if (j>=2000){
+      ctx3.clearRect(i3,10,50,50);
+      i3=i3+10;
+      ctx3.fillRect(i3,10,50,50);
+    }
+
+}
+
+function carre(){  interval = setInterval(draw, 100);}
+
+  </script>
+</head>
+<body onload='setTimeout(carre(), 4000)'>
+</body>
+</html>

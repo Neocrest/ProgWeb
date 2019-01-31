@@ -1,0 +1,44 @@
+<html>
+  <head>
+  <title>Optimized moving squares + delay</title>
+  <canvas id ="canvas" width="1500" height="300"></canvas>
+  <script type="application/x-javascript">
+
+/*                                DECLARATION VARIABLES                   */
+  var j = 0,    //timer
+    iList = [10,10,10,10,10,10,10,10,10,10], //pos initiale des carrés
+    canvasList = [], ctxList = [];
+
+  for(i=0;i<=9;i++){    //Init canvas
+    canvasList[i] = document.getElementById('canvas');
+    ctxList[i] = canvas.getContext('2d');
+    ctxList[i].fillStyle = "rgb(200,0,0)";
+  }
+
+
+function draw(){
+
+  for(var i=0;i<=9;i++){
+    /*
+    si on enlève le var, canvas se coupe à droite
+    if(j>=1000*i && j<1000*(i+1)){    ça marche mais ça stoppe plus tôt
+    if(j>=1000*i){    //à partir de la valeur initiale de i + 2, superposition, pas de clear, y'a accélération visible si on change l'incrémentation de j
+    j=j+100;    ici, superposition totale
+    */
+    if(j>=1000*i){
+      //j=j+100;    ici, superposition en accélération
+      ctxList[i].clearRect(iList[i],10,50,50);
+      iList[i] = iList[i]+10;
+      ctxList[i].fillRect(iList[i],10,50,50);
+
+    }
+  }j=j+100;   //selon position dans la fonction, on a accélération de la superposition des carrés
+}
+
+function carre(){  interval = setInterval(draw, 100);}
+
+  </script>
+</head>
+<body onload='setTimeout(carre(), 4000)'>
+</body>
+</html>
