@@ -1,0 +1,38 @@
+<html>
+<head><title>TP2 test_3</title>
+</head>
+<body>
+  <h1 id="carre"></h1>
+
+</body>
+
+  <script>
+  var elem = document.getElementById("carre");
+
+  elem.style.position = "absolute";
+  elem.style.width = 100;
+  elem.style.height = 100;
+  elem.style.backgroundColor = "red";
+
+  //var left = 1000;    //déclaration a 0 importance mais en a dans test4
+
+  //var start = null; null = 0
+  var start=0;
+
+  function anim(timestamp) {
+    var progress;
+    if (start === null) start = timestamp;
+    progress = timestamp - start;
+    elem.style.left = Math.min(progress*1, 1420) + "px";
+
+    //On empêche le dépachement de la fenêtre
+    if (progress < 1420) {
+      requestAnimationFrame(anim);
+    }
+  }
+
+  requestAnimationFrame( anim, 16);
+
+
+  </script>
+</html>
