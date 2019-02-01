@@ -25,7 +25,8 @@
         }
           ctx.clearRect(0,0,1000,100);
           //paramètres drawImage : image,sx,sy,sWidth,sHeight / dx,dy,dWidth,dHeight
-          ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 100*i, 0, 100, 100);      //100,100 pour l'affichage de la pièce / 0,0 pour coos du début de l'affichage
+          //La pièce fait 100*100px, les sprites ne sont pas espacés
+          ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 100*i, 0, 100, 100);
           i++;
         requestAnimationFrame(draw);
         pausecomp(100);
