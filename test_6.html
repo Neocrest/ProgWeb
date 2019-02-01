@@ -20,16 +20,17 @@
 
     function draw() {
       // Draw slice
-        if(i>9){    //Valeur >i détermine où s'arête la rota, on a "9" sprites
+        if(i>9){    //Valeur >i détermine où s'arête la rota, on a "9" slices
             i=0;
         }
           ctx.clearRect(0,0,1000,100);
           //paramètres drawImage : image,sx,sy,sWidth,sHeight / dx,dy,dWidth,dHeight
-          //La pièce fait 100*100px, les sprites ne sont pas espacés
+          //La pièce fait 100*100px, les slices ne sont pas espacés
+          //Si on veut que la pièce tourne sur place, il suffit de mettre dx = 0
           ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 100*i, 0, 100, 100);
           i++;
         requestAnimationFrame(draw);
-        pausecomp(100);
+        pausecomp(64);
     }
     draw();
 
