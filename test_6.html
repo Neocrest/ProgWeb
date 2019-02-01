@@ -5,7 +5,7 @@
     <body>
         <h1 id= "animatedElem" />
         <meta charset="UTF-8">
-        <canvas id="carre" width="1000" height="100" style="border:1px solid #d3d3d3;">
+        <canvas id="carre" width="100" height="100" style="border:1px solid #d3d3d3;">
         <img id="img" src="file:///D:/ProgWeb/Etudiant/images//coin-sprite-animation.png">
     </body>
     <script>
@@ -23,11 +23,11 @@
         if(i>9){    //Valeur >i détermine où s'arête la rota, on a "9" slices
             i=0;
         }
-          ctx.clearRect(0,0,1000,100);
+          ctx.clearRect(0,0,100,100);
           //paramètres drawImage : image,sx,sy,sWidth,sHeight / dx,dy,dWidth,dHeight
           //La pièce fait 100*100px, les slices ne sont pas espacés
           //Si on veut que la pièce tourne sur place, il suffit de mettre dx = 0
-          ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 100*i, 0, 100, 100);
+          ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 0, 0, 100, 100);
           i++;
         requestAnimationFrame(draw);
         pausecomp(64);
