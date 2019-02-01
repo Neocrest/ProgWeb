@@ -17,11 +17,11 @@
 
   var left = 1400;
   var timer;
-  // Move the element 10px on the left every 16ms
+  // Move the element 10px on the right every 16ms
   timer = setInterval(function() {
       elem.style.left = ( left -= 10 ) + "px";
       pausecomp(16);
-      // clear the timer at 100px to stop the animation
+      // clear timer si on dépasse à gauche
       if ( left < 100 ) {
           clearInterval( timer );
       }
