@@ -1,0 +1,33 @@
+<html>
+<head><title>TP2 test_5</title>
+</head>
+<body>
+  <h1 id="carre"></h1>
+  <meta charset="UTF-8">
+  <!-- <script type="text/javascript" src="q01.js"></script> -->
+
+</body>
+
+  <script>
+  var elem = document.getElementById("carre");
+
+  elem.style.position = "absolute";
+  elem.style.width = 100;
+  elem.style.height = 100;
+  elem.style.backgroundColor = "red";
+
+  var left = 0;
+  var timer;
+
+  function anim() {
+    elem.style.left = ( left += 10 ) + "px";
+    timer = requestAnimationFrame( anim, 16);
+      if ( left > 1420 ) {          cancelAnimationFrame(timer);      }  }
+
+  var now, lastFrame, deltaT = now - lastFrame;
+  if ( deltaT < 160 ) {                running = render( deltaT );}
+
+    setTimeout(function(){requestAnimationFrame( anim, elem );}, 1000); //attente de 1000ms
+
+  </script>
+</html>

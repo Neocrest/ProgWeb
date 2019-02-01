@@ -1,0 +1,45 @@
+<html>
+<head><title>TP2 test_4</title>
+</head>
+<body>
+  <h1 id="carre"></h1>
+  <meta charset="UTF-8">
+  <!-- <script type="text/javascript" src="q01.js"></script> -->
+
+</body>
+
+  <script>
+  var elem = document.getElementById("carre");
+
+  elem.style.position = "absolute";
+  elem.style.width = 100;
+  elem.style.height = 100;
+  elem.style.backgroundColor = "red";
+
+
+  var timer;
+  var left= 0;    //!!!! IMPORTANT ICI !!!!!!!
+  // Move the element 10px on the right every 16ms
+
+  function anim() {
+    //on n'utilise plus timestamp donc pas besoin de paramétrer
+    elem.style.left = ( left += 10 ) + "px";
+    timer = requestAnimationFrame( anim, 16);
+
+    //On n'utilise plus progress pour la terminaison du pg
+      if ( left > 1420 ) {
+          cancelAnimationFrame(timer);
+      }
+  }
+
+
+    //Ajout test_4
+
+      requestAnimationFrame( anim, elem );
+      var now, lastFrame, deltaT = now - lastFrame;
+
+      // do not render frame when deltaT is too high
+      if ( deltaT < 160 ) {                running = render( deltaT );}
+
+  </script>
+</html>

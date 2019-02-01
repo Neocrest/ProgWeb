@@ -1,0 +1,37 @@
+<html>
+<head><title>TP2 test_2</title>
+</head>
+<body>
+  <meta charset="UTF-8">
+  <h1 id="carre"></h1>
+
+</body>
+
+  <script>
+  var elem = document.getElementById("carre");
+
+  elem.style.position = "absolute";
+  elem.style.width = 100;
+  elem.style.height = 100;
+  elem.style.backgroundColor = "red";
+
+  var left = 0;
+  var timer;
+  var d;
+  var beforeDate = new Date();
+
+  timer = setInterval(function() {
+    var curDate = new Date();
+
+    d = 20*((curDate-beforeDate)/300000);
+
+    elem.style.left = ( left += d*(curDate-beforeDate) ) + "px";
+      if ( d > 0.0671) { //0.0671 valeur max  
+          clearInterval( timer );
+      }
+
+      }, 16);
+
+      </script>
+
+</html>
