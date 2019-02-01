@@ -20,14 +20,15 @@
 
     function draw() {
       // Draw slice
-        if(i>8){
+        if(i>9){    //Valeur >i détermine où s'arête la rota, on a "9" sprites
             i=0;
         }
-          ctx.clearRect(0,0,1000,500);
-          ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 0, 0, 100, 100);      //100,100 pour l'affichage de la pièce / 0,0 pour coos du début de l'affichage
-        i++;
+          ctx.clearRect(0,0,1000,100);
+          //paramètres drawImage : image,sx,sy,sWidth,sHeight / dx,dy,dWidth,dHeight
+          ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 100*i, 0, 100, 100);      //100,100 pour l'affichage de la pièce / 0,0 pour coos du début de l'affichage
+          i++;
         requestAnimationFrame(draw);
-        pausecomp(10);
+        pausecomp(100);
     }
     draw();
 
