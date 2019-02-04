@@ -29,7 +29,7 @@
           //Si on veut que la pièce tourne sur place, il suffit de mettre dx = 0
           ctx.drawImage(document.getElementById('img'), 100*i, 0, 100, 100, 0, 0, 100, 100);
           i++;
-        requestAnimationFrame(draw);
+        requestAnimationFrame(draw);    //ne fonctionne que sur Firefox 23 / IE 10 / Chrome / Safari 7 (incl. iOS)
         pausecomp(64);
     }
     draw();

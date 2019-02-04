@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Events </title>
+    </head>
+    <body>
+      <canvas id="map" style="border: thick solid #7D7371;"></canvas>
+    </body>
+    <script>
+        // Attention, cette implémentation utilise keyCode, dépréciée: utiliser pluôt la propriété key de l'objet keyboardEvent.
+        //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key...
+        //mais l'alternative proposée par MDN n'est pas reconnue par tous les navigateurs.
+
+    window.addEventListener('keydown', doKeyDown, true);
+
+    var canvas = document.getElementById("map");
+    context = canvas.getContext("2d");
+    var x = 1500, y = 740;
+    canvas.width = x;
+    canvas.height = y;
+
+//cf drawGame, on a 4 frames par déplacement (cf sprite)
+      var frame = 0;
+//Orientation du personnage
+      var orientation;
+
+//Tableau de stockage événement utilisateur
+    var dirTab={
+      'up' : 0,
+      'down' : 0,
+      'left': 0,
+      'right':0
+    };
+
+    var animFrame = window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            window.oRequestAnimationFrame      ||
+            window.msRequestAnimationFrame     ||
+            null ;
+
+
+    function clearCanvas() {      canvas.width = canvas.width;}
+
+    var mainloop = function() {
+          updateGame();
+          drawGame();
+      };
+
+      var recursiveAnim = function() {
+          mainloop();
+          animFrame( recursiveAnim );
+      };
+
+      //start la mainloop
+      animFrame( recursiveAnim );
+
+      var ximg = 0;
+      var yimg = 0;
+
+      var xperso = 0;
+      var yperso = 0;
+
+
+      function drawGame() {
+        //if(frame===4){frame=0;}
+
+        if(frame===0){
+          context.clearRect(0,0,x,y);
+          var img = new Image();
+          img.src = "sprite.png"
+
+          if(orientation==='up'){
+            context.drawImage(img,ximg,512-128,128,128,xperso,yperso,128,128);
+            ximg=(ximg+128)%512;
+          }
+
+          else if(orientation==='down'){
+            context.drawImage(img,ximg,256,128,128,xperso,yperso,128,128);
+            ximg=(ximg+128)%512;
+          }
+
+          else if(orientation==='left'){
+            context.drawImage(img,ximg,0,128,128,xperso,yperso,128,128);
+            ximg=(ximg+128)%512;
+          }
+
+          else if(orientation==='right'){
+            context.drawImage(img,ximg,128,128,128,xperso,yperso,128,128);
+            ximg=(ximg+128)%512;
+          }
+
+          else{
+            context.drawImage(img,128,256,128,128,xperso,yperso,128,128);
+          }
+
+        }
+      }
+
+      function updateGame() {
+
+        /* Update sur le déplacement du personnage
+        Cela consiste à "reset" le sprite du héros quand on a un événement
+        keyboard et éviter le dépassement du canvas en laissant la possibilité
+        de cross.
+        Chaque boucle else permet de pouvoir se déplacer de manière infinie d'un
+        côté sans être restreint par les borders du canvas. Les enlever si on
+        ne veut pas cela*/
+
+        if(dirTab['up']===1){
+          clearCanvas();
+          orientation = 'up';
+          if(yperso>0){
+            yperso-=3;
+          }
+          else{
+            yperso = y-128;
+          }
+          dirTab['up']=0;
+        }
+
+        else if(dirTab['down']===1){
+          clearCanvas();
+          orientation='down';
+          if(yperso<y-128){
+            yperso+=3;
+          }
+          else{
+            yperso = 0;
+          }
+          dirTab['down']=0;
+        }
+
+        else if(dirTab['left']===1){
+          clearCanvas();
+          orientation='left';
+          if(xperso>0){
+            xperso-=3;
+          }
+          else{
+            xperso = x-128;
+          }
+          dirTab['left']=0;
+        }
+
+        else if(dirTab['right']===1){
+          clearCanvas();
+          orientation='right';
+          if(xperso<x-128){
+            xperso+=3;
+          }
+          else{
+            xperso=0;
+          }
+
+          dirTab['right']=0;
+        }
+      }
+
+    //Association keyboardEvent dirTab
+    function doKeyDown(e){
+             e.preventDefault();
+
+      /*---------------Down---------------*/
+      if (e.keyCode == 40 || e.keyCode == 83) {
+        dirTab['down']=1;
+      }
+
+      /*---------------Up---------------*/
+      if (e.keyCode == 38 || e.keyCode == 90) {
+        dirTab['up']=1;
+      }
+
+      /*---------------Left---------------*/
+      if (e.keyCode == 37 || e.keyCode == 81) {
+        dirTab['left']=1;
+      }
+
+      /*---------------Right---------------*/
+      if (e.keyCode == 39 || e.keyCode ==68) {
+        dirTab['right']=1;
+
+            }
+
+            //Space is 32, Enter is 13, Tab is 9, esc is 27, backspace is 8...
+            // A to Z is 65 to 90
+            //List of event.which indexes : https://keycode.info/
+
+    }
+
+
+  </script>
+</html>
