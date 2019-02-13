@@ -53,7 +53,7 @@ function keyUpHandler(event) {
 ///////////////////////////////////
 
 
-
+var score = 0;
 /////////////////////////////////
 // Hero Player
 var imgPlayer = new Image();
@@ -65,7 +65,7 @@ var PlayerHeight = 15;
 var PlayerWidth = 32;
 var PlayerImgHeight = 29;
 var PlayerImgWidth = 64;
-var i=0;
+var spritePlayer=0;
 /////////////////////////////////
 
 
@@ -96,16 +96,20 @@ function updateItems() {
 }
 function drawScene() {
     "use strict";
-    canArena.style.backgroundPosition = xBackgroundOffset + "px 0px" ;
+    canArena.style.backgroundPosition = xBackgroundOffset + "px 50px" ;
+    conArena = canArena.getContext("2d");
+    conArena.font = "20px Impact";
+    conArena.fillText("Score : " + score + "",0,0);
+
 }
 function drawPlayer() {
   "use strict";
-      if(i>3){
-          i=0;
+      if(spritePlayer>3){
+          spritePlayer=0;
       }
         conArena.clearRect(xPlayer,yPlayer,PlayerWidth,PlayerHeight);
-        conArena.drawImage(imgPlayer, 0, PlayerImgHeight*i, PlayerImgWidth, PlayerImgHeight, xPlayer, yPlayer, PlayerWidth, PlayerHeight);
-        i++;
+        conArena.drawImage(imgPlayer, 0, PlayerImgHeight*spritePlayer, PlayerImgWidth, PlayerImgHeight, xPlayer, yPlayer, PlayerWidth, PlayerHeight);
+        spritePlayer++;
       requestAnimationFrame(drawPlayer);
       //si millis dépasse 5, la latence se fait ressentir sur le déplacement du joueur (problème de sync)
       pausecomp(3);
@@ -147,11 +151,12 @@ function recursiveAnim () {
 
 function init() {
     "use strict";
-    divArena = document.getElementById("arena");
+      divArena = document.getElementById("arena");
     canArena = document.createElement("canvas");
     canArena.setAttribute("id", "canArena");
     conArena = canArena.getContext("2d");
     divArena.appendChild(canArena);
+
 
 
 window.addEventListener("keydown", keyDownHandler, false);
